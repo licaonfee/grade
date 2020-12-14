@@ -27,7 +27,7 @@ ok  	github.com/influxdata/influxdb/services/httpd	5.131s
 
 	expBs := map[string][]*parse.Benchmark{
 		"github.com/influxdata/influxdb/services/continuous_querier": nil,
-		"github.com/influxdata/influxdb/services/graphite": []*parse.Benchmark{
+		"github.com/influxdata/influxdb/services/graphite": {
 			{
 				Name:              "Parse",
 				Procs:             4,
@@ -38,7 +38,7 @@ ok  	github.com/influxdata/influxdb/services/httpd	5.131s
 				Measured:          parse.NsPerOp | parse.AllocedBytesPerOp | parse.AllocsPerOp,
 			},
 		},
-		"github.com/influxdata/influxdb/services/httpd": []*parse.Benchmark{
+		"github.com/influxdata/influxdb/services/httpd": {
 			{
 				Name:              "LimitListener",
 				Procs:             1,
@@ -52,7 +52,7 @@ ok  	github.com/influxdata/influxdb/services/httpd	5.131s
 	}
 
 	if !reflect.DeepEqual(bs, expBs) {
-		t.Fatalf("got %q\nexp %q", bs, expBs)
+		t.Fatalf("got %v\nexp %v", bs, expBs)
 	}
 }
 
@@ -72,7 +72,7 @@ ok  	github.com/example/append	7.966s
 	}
 
 	expBs := map[string][]*parse.Benchmark{
-		"github.com/example/append": []*parse.Benchmark{
+		"github.com/example/append": {
 			{
 				Name:              "AppendFloat/Decimal",
 				Procs:             4,
@@ -95,6 +95,6 @@ ok  	github.com/example/append	7.966s
 	}
 
 	if !reflect.DeepEqual(bs, expBs) {
-		t.Fatalf("got %q\nexp %q", bs, expBs)
+		t.Fatalf("got %v\nexp %v", bs, expBs)
 	}
 }

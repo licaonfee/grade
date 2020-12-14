@@ -48,17 +48,30 @@ func main() {
 			fmt.Println(p.String())
 		}
 	} else {
+		for _, p := range points.Points() {
+			fields, err := p.Fields()
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error %v", err)
+				os.Exit(1)
+			}
+			name := p.Tags()["name"]
+			for _, k := range []string{"alloced_bytes_per_op", "allocs_per_op", "ns_per_op"} {
+				fmt.Printf("%s_%s	%v\n", name, k, fields[k])
+			}
+
+		}
 		cl, err := buildClient()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error creating InfluxDB client: %v\n", err)
 			os.Exit(1)
 		}
-		defer cl.Close()
-
+		rc := 0
 		if err := cl.Write(points); err != nil {
 			fmt.Fprintf(os.Stderr, "Error writing benchmark data to InfluxDB: %v\n", err)
-			os.Exit(1)
+			rc = 1
 		}
+		cl.Close()
+		os.Exit(rc)
 	}
 }
 
