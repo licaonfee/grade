@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/influxdata/grade/internal/parse"
+	"github.com/licaonfee/grade/internal/parse"
 )
 
 func TestParse16BenchmarksInPackage(t *testing.T) {

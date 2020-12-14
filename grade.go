@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/influxdata/grade/internal/parse"
+	"github.com/licaonfee/grade/internal/parse"
 	client "github.com/influxdata/influxdb/client/v2"
 )
 
