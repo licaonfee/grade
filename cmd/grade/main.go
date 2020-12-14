@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/influxdata/grade"
 	client "github.com/influxdata/influxdb/client/v2"
+	"github.com/licaonfee/grade"
 )
 
 var (
